@@ -134,3 +134,6 @@ NPM_BIN_PATH = 'npm.cmd'
 
 # to use custom user model
 AUTH_USER_MODEL = 'account.User'
+
+# define Domain
+SITE_DOMAIN = 'http://127.0.0.1:8000/'

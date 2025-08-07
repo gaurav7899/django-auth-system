@@ -1,0 +1,91 @@
+{% extends 'account/base.html' %}
+
+{% block title %}Register{% endblock title %}
+
+
+{% block content %}
+<div class="flex items-center justify-center px-6 py-10">
+    <div class="w-full max-w-md p-8 space-y-6 bg-gray-800 rounded-lg shadow-md">
+        <h2 class="text-center text-xl font-semibold text-rose-600">Create an Account</h2>
+        <form action="" method="post" novalidate>
+            {% csrf_token %}
+            <fieldset>
+                {% comment %} name field {% endcomment %}
+                <div class="mb-4">
+                <label for="name" class="text-md">Name:</label>
+                <input type="text" name="name" id="name" value="{{form.name.value | default:''}}" class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder="Enter your name" required>
+                {% if form.name.errors %}
+                    <div class="text-red-600 text-sm mt-1 ">
+                        {% for error in form.name.errors %}
+                        <p>{{error}}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                </div>
+
+                <div class="mb-4">
+                <label for="" class="text-md">Email:</label>
+                <input type="email" name="email" id="email" value="{{form.email.value | default:''}}" class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="yourname@exmple.com" required>
+                {% if form.email.errors %}
+                    <div class="text-red-600 text-sm mt-1 ">
+                        {% for error in form.email.errors %}
+                        <p>{{error}}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                </div>
+
+
+                <div class="mb-4">
+                <label for="" class="text-md">Password:</label>
+                <input type="Password" id="Password" name="password" class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="******" required>
+                {% if form.password.errors %}
+                    <div class="text-red-600 text-sm mt-1 ">
+                        {% for error in form.password.errors %}
+                        <p>{{error}}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                </div>
+
+
+                <div class="mb-4">
+                 <label for="" class="text-md">Confirm Password:</label>
+                <input type="Password" id="confirm_password" name="confirm_password" class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="******">
+                {% if form.confirm_password.errors %}
+                    <div class="text-red-600 text-sm mt-1 ">
+                        {% for error in form.confirm_password.errors %}
+                        <p>{{error}}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                </div>
+
+                <div class="flex items-center h-5 gap-4">
+                <input id="terms" type="checkbox" value="   " class="w-4 h-4 border border-gray-300 rounded-sm bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800" required />
+                Remember me
+                </div>
+                <div class="mb-2">
+                <button type="submit" class="focus:outline-none text-white bg-rose-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 w-full mt-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Register</button>
+                </div>
+
+                {% comment %} divider {% endcomment %}
+                <div class="relative mt-6">
+                    <div class="absolute inset-0 flex items-center">
+                        <div class="w-full border-t border-gray-300"></div>
+                    </div>
+                    <div class="relative flex justify-center text-sm">
+                        <span class="px-2 bg-gray-800 text-gray-400">Or</span>
+                    </div>
+                </div>
+
+                <div class="text-center ">
+                    <p class="text-sm text-gray-400">Exiting User?
+                        <a href="{% url "login" %}" class="text-rose-400 hover:underline">Login</a>
+                    </p>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+{% endblock content %}

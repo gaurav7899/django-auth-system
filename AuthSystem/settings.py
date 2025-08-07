@@ -137,3 +137,5 @@ AUTH_USER_MODEL = 'account.User'
 
 # define Domain
 SITE_DOMAIN = 'http://127.0.0.1:8000/'
+# site name
+SITE_NAME = 'Auth System'

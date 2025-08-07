@@ -8,6 +8,7 @@ from django.utils.http import urlsafe_base64_encode,urlsafe_base64_decode
 from django.utils.encoding import force_bytes,force_str
 from django.contrib.auth.tokens import default_token_generator
 from django.urls import reverse
+from account.utils import send_activation_emial
 # home page --> account
 
 def home(request):
@@ -29,6 +30,7 @@ def register(request):
             token = default_token_generator.make_token(user)
             activation_link = reverse("",kwargs={"uidb64":uidb64,"token":token})
             activation_url = f'{settings.SITE_DOMAIN}{activation_link}'
+            send_activation_emial(user.email,activation_url)
             messages.success(request,"Registration successfull! Please check your email to activate your account")
             return redirect('login')
     else:

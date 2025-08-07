@@ -6,17 +6,25 @@ from django.conf import settings
 import threading
 
 class SendEmailThread(threading.Thread):
-    def __init__(self,email):
+    def __init__(self,email):  # use a private attribute
         threading.Thread.__init__(self)
+        self.email = email
 
     # define run methods
     def run(self):
         self.email.send()
 
-def send_activation_emial(recipient_email,activation_url):
+def send_activation_email(recipient_email,activation_url):
     subject = "Activation your account on" + settings.SITE_NAME
-    from_email = "noreply@somting.com"
+    from_email = "noreply@demomailtrap.co"
     to_email = [recipient_email]
 
     # load Html template
-    html_render = render_to_string('account/activation_email.html',{'activation_url':activation_url})
+    html_content = render_to_string('account/activation_email.html',{'activation_url':activation_url})
+
+    text_content = strip_tags(html_content)
+
+    # send email
+    email=EmailMultiAlternatives(subject,text_content,from_email,to_email)
+    email.attach_alternative(html_content,"text/html")
+    SendEmailThread(email).start()
